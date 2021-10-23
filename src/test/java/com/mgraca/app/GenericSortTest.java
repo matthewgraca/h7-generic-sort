@@ -15,15 +15,7 @@ public class GenericSortTest
     List<Integer> data = Arrays.asList(14, 3, 7, 20, 1, 9);
     List<Integer> sol = Arrays.asList(1, 3, 7, 9, 14, 20);
 
-    // define comparator
-    Comparator<Integer> lt = new Comparator<Integer>(){
-      @Override
-      public int compare(Integer int1, Integer int2){
-        return int1 < int2 ? -1: int1 > int2 ? 1: 0;
-      }
-    };
-
-    Collections.sort(data, lt);
+    data.sort((Integer i1, Integer i2)->i1-i2);
     String errMsg = "Expected " + sol.toString() + ", returned " + data.toString();
     assertTrue(errMsg, sol.equals(data));
   }
@@ -33,15 +25,7 @@ public class GenericSortTest
     List<Double> data = Arrays.asList(4.5, 3.0, 9.0, 8.4, 7.2, 6.1, 20.5, 5.1);
     List<Double> sol = Arrays.asList(20.5, 9.0, 8.4, 7.2, 6.1, 5.1, 4.5, 3.0);
 
-    // define comparator
-    Comparator<Double> gt = new Comparator<Double>(){
-      @Override
-      public int compare(Double dub1, Double dub2){
-        return dub1 < dub2 ? 1: dub1 > dub2 ? -1: 0;
-      }
-    };
-
-    Collections.sort(data, gt);
+    data.sort((Double d1, Double d2)->d2<d1 ? -1: d2<d1 ? 1: 0);
     String errMsg = "Expected " + sol.toString() + ", returned " + data.toString();
     assertTrue(errMsg, sol.equals(data));
   }
@@ -55,7 +39,7 @@ public class GenericSortTest
                                         new Student("John", 42), new Student("Kay", 39),
                                         new Student("Tay", 42), new Student("Zadi", 41));
 
-    Collections.sort(data, Student.ascendingNameComparator());
+    data.sort(Student.ascendingNameComparator());
     String errMsg = "Expected " + sol.toString() + ", returned " + data.toString();
     assertTrue(errMsg, sol.equals(data));
   }
@@ -69,7 +53,7 @@ public class GenericSortTest
                                         new Student("John", 42), new Student("Tay", 42),
                                         new Student("Zadi", 41), new Student("Kay", 39));
 
-    Collections.sort(data, Student.descendingScoreComparator());
+    data.sort(Student.descendingScoreComparator());
     String errMsg = "Expected " + sol.toString() + ", returned " + data.toString();
     assertTrue(errMsg, sol.equals(data));
   }
